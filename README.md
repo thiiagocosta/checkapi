@@ -1,2 +1,2 @@
-# checkapi
-CheckAPI - Aplicação para teste de permissão.
+# endpointcheck
+EC - Endpoint Check

@@ -1,10 +1,11 @@
 
 <h1 align="center">CheckApi</h1>
 
-## Description ##
+### Description ###
 Check API endpoint permissions.
+Postman Archives compatibility(json).
 
-## Install ##
+### Install ###
 1) Use PHP CLI ˆ7.4
 2) Execute install.sh
 3) Change variables in src/config.php
@@ -14,13 +15,13 @@ Check API endpoint permissions.
 
 5) Past your Postman.json.
 
-## Execute ##
+### Execute ###
 Open your Terminal, access '/src' folder and run:
 ```bash
 php console.php
 ```
 
-## Export Result CSV ##
+### Export Result CSV ###
 The file is created in your project folder 'DATETIME_result.csv'.
 To export run:
 ```bash

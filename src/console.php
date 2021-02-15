@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 $client = new GuzzleHttp\Client();
 $csv = new Csv();
 
-// Verifica se recebe: export=true
+// Check variable "export": export=true
 $export = filter_var( !empty($argv[1]) ? ( explode("=", $argv[1])[0] == "export" ) ? explode("=", $argv[1])[1] : false : false , FILTER_VALIDATE_BOOLEAN);
 
 // Open file

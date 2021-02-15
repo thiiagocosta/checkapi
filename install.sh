@@ -18,6 +18,14 @@ else
   echo "vendor/ exist."
 fi
 
+# Create Folder Project
+if [ ! -d "projects" ]; then
+  echo -e "Create folder /projects."
+  mkdir projects
+else
+  echo "project/ exist."
+fi
+
 # Create Config File
 if [ ! -f config.php ]; then
   cp config_exemple.php config.php

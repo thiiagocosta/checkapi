@@ -13,14 +13,13 @@ $export = filter_var( !empty($argv[1]) ? ( explode("=", $argv[1])[0] == "export"
 
 // Open file
 $data = json_decode(file_get_contents( PATH.'/'.PATH_PROJECT.'/'.FILE ));
-$epSum = 1;
+$sum = 1;
 
 // Start Process
 echo PHP_EOL . "Start Process: " . PHP_EOL . PHP_EOL;
-echo "Arquivo: " . FILE . PHP_EOL;
+echo "File: " . FILE . PHP_EOL;
 echo "Projeto: " . $data->info->name . PHP_EOL.PHP_EOL;
-
-echo "Pastas: " . PHP_EOL;
+echo "Folder: " . PHP_EOL;
 
 $list = [ [ "Method", "Status", "Endpoint", "Message" ] ];
 
@@ -33,23 +32,23 @@ foreach( $data->item as $item ){
             $method = $endpoint->request->method;
             
             try {
-                $response = $client->request( $method , HOST.$url, [ 'headers' => HEADER ] );
+                $response = $client->request( $method , HOST.$url, [ 'headers' => HEADER, 'timeout' => 10 ] );
                 $status = $response->getStatusCode();
-                $msg = "";
+                $msg = "OK";
             } catch (Exception $e) {
-                $getMessage = (string) explode ("response:\n", $e->getMessage())[1];
-                $msg = " - Response: " . trim($getMessage); 
                 $status =  $e->getCode();
+                $getMessage = (string) explode ("response:\n", $e->getMessage())[1];
+                $msg = $status != 0 ? trim($getMessage) : "Timeout";
             }
 
-            echo "  " . $epSum. ". [" . $method ."] - ". $status ." - ". $url . $msg . PHP_EOL;
+            echo "  " . $sum. ". [" . $method ."] - ". $status ." - ". $url . " - Result: " . $msg . PHP_EOL;
 
             if($export){
                 $listItem = [ $method, $status, $url, trim($getMessage) ];
                 array_push($list, $listItem);
             }
 
-            $epSum++;
+            $sum++;
             $method = "";
             $status = "";
             $msg = "";
